@@ -1,5 +1,10 @@
 # Hathway Broadband for Home Assistant
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="custom_components/hathway/brand/dark_logo@2x.png">
+  <img src="custom_components/hathway/brand/logo@2x.png" alt="Hathway" width="240">
+</picture>
+
 Shows your Hathway broadband data quota in Home Assistant, together with the
 billing cycle it belongs to: how much of the month's quota is used, how many days
 are left until it resets, and where usage is heading by the reset date.
@@ -92,9 +97,9 @@ pip install pytest-homeassistant-custom-component
 pytest -q tests_ha         # config flow, sensors, re-authentication
 ```
 
-`docs/api.md` describes the endpoints and encryption. `tools/make_icon.py` draws
-the icon in `brand/`.
+`docs/api.md` describes the endpoints and encryption. `docs/branding.md` explains
+the images in `brand/` and how `tools/make_brand.sh` rebuilds them.
 
 This is an independent community project, not affiliated with or endorsed by
-Hathway Cable & Datacom Ltd. "Hathway" is their trademark, used here only to name
-the compatible service; the icon is generic artwork.
+Hathway Cable & Datacom Ltd. The Hathway name and logo are their trademarks, used
+here only to identify the compatible service.
