@@ -68,3 +68,17 @@ async def test_unload(hass, api, entry, ist):
     await _setup(hass, entry)
     assert await hass.config_entries.async_unload(entry.entry_id)
     assert entry.state is ConfigEntryState.NOT_LOADED
+
+
+async def test_unlimited_plan(hass, api, entry, ist, freezer):
+    from dataclasses import replace
+    from .conftest import ACCOUNT
+    freezer.move_to("2026-11-12 06:30:00+00:00")
+    api["status"].return_value = replace(ACCOUNT, used_mb=0, total_mb=0, quota_label="Unlimited")
+    await _setup(hass, entry)
+    for key in ("data_quota", "data_remaining", "usage_percentage"):
+        assert hass.states.get(f"sensor.hathway_{key}").state == "unknown", key
+    assert hass.states.get("sensor.hathway_data_used").state == "0.0"
+    projected = hass.states.get("sensor.hathway_projected_usage")
+    assert projected.attributes["quota_gib"] is None
+    assert projected.attributes["projected_percentage"] is None

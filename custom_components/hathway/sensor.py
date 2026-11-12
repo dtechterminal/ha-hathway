@@ -42,11 +42,13 @@ def _projection_attrs(c: HathwayCoordinator) -> dict[str, Any]:
     account, cycle = c.data.account, c.cycle()
     elapsed = cycle.elapsed_fraction_days(dt_util.now())
     projected = _projection(c)
+    limited = not account.unlimited
     return {
-        "daily_average_gib": round(account.used_mb / GIB / elapsed, 1) if projected else None,
+        "daily_average_gib": (round(account.used_mb / GIB / elapsed, 1)
+                              if projected is not None else None),
         "projected_percentage": (round(projected / account.total_mb * 100, 1)
-                                 if projected and account.total_mb else None),
-        "quota_gib": round(account.total_mb / GIB, 1),
+                                 if projected is not None and limited else None),
+        "quota_gib": round(account.total_mb / GIB, 1) if limited else None,
         "cycle_length_days": cycle.length_days,
     }
 
@@ -89,13 +91,13 @@ SENSORS: tuple[HathwaySensorDescription, ...] = (
     ),
     HathwaySensorDescription(
         key="data_quota", **DATA_SIZE,
-        value_fn=lambda c: c.data.account.total_mb,
+        value_fn=lambda c: None if c.data.account.unlimited else c.data.account.total_mb,
     ),
     HathwaySensorDescription(
         key="usage_percentage", native_unit_of_measurement=PERCENTAGE,
         state_class=SensorStateClass.MEASUREMENT, suggested_display_precision=1,
-        value_fn=lambda c: (round(c.data.account.used_mb / c.data.account.total_mb * 100, 1)
-                            if c.data.account.total_mb else None),
+        value_fn=lambda c: (None if c.data.account.unlimited else
+                            round(c.data.account.used_mb / c.data.account.total_mb * 100, 1)),
     ),
     HathwaySensorDescription(
         key="projected_usage", **DATA_SIZE,

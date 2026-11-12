@@ -102,3 +102,11 @@ def test_check():
     assert not isinstance(err.value, HathwayAuthError)
     with pytest.raises(HathwayAuthError):
         _check({"status": "failure", "responseCode": 400}, auth_endpoint=True)
+
+
+def test_unlimited_plan():
+    payload = json.loads(json.dumps(ACCOUNT))
+    payload["data"][0]["customer"].update(data_usage_x=0, data_usage_y=0, quota="Unlimited")
+    a = parse_account(payload)
+    assert a.unlimited and a.remaining_mb is None
+    assert not parse_account(ACCOUNT).unlimited

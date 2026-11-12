@@ -118,8 +118,13 @@ class AccountStatus:
     last_payment_date: datetime | None
 
     @property
-    def remaining_mb(self) -> int:
-        return max(self.total_mb - self.used_mb, 0)
+    def unlimited(self) -> bool:
+        """Plans without a quota report 0 MB as the allowance (quota "Unlimited")."""
+        return self.total_mb <= 0 or (self.quota_label or "").strip().lower() == "unlimited"
+
+    @property
+    def remaining_mb(self) -> int | None:
+        return None if self.unlimited else max(self.total_mb - self.used_mb, 0)
 
 
 def _ts(value: Any) -> datetime | None:
