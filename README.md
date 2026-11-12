@@ -32,19 +32,18 @@ sizes are in GiB.
 
 ## Installation
 
-### HACS
+1. In Home Assistant, open **HACS**, search for **Hathway Broadband** and download it.
+2. Restart Home Assistant.
 
-Add this repository as a custom repository in HACS (category: Integration), install
-**Hathway Broadband**, then restart Home Assistant.
+[![Open your Home Assistant instance and open this repository in HACS.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=dtechterminal&repository=ha-hathway&category=integration)
 
-### Manual
-
-Copy `custom_components/hathway` into your Home Assistant `config/custom_components/`
-folder and restart Home Assistant.
+Without HACS: copy the `custom_components/hathway` folder from this repository into
+your Home Assistant `config/custom_components/` folder and restart.
 
 ## Setup
 
 1. **Settings → Devices & services → Add integration → Hathway Broadband.**
+   [![Open your Home Assistant instance and start setting up Hathway Broadband.](https://my.home-assistant.io/badges/config_flow_start.svg)](https://my.home-assistant.io/redirect/config_flow_start/?domain=hathway)
 2. Choose **Sign in with an SMS OTP**, enter the registered mobile number, then the OTP.
    If several accounts share the number, pick one.
 3. Open the integration's **Configure** to set the **quota reset day** (default 26)

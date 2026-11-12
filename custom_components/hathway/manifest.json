@@ -1,6 +1,9 @@
 {
   "domain": "hathway",
   "name": "Hathway Broadband",
+  "categories": [
+    "computers_network.monitoring"
+  ],
   "codeowners": [
     "@ankurpandeyvns"
   ],
