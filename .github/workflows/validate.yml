@@ -1,0 +1,15 @@
+name: HACS validation
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  hacs:
+    runs-on: ubuntu-latest
+    # HACS refuses private repositories; this check runs once the repo is public.
+    if: ${{ !github.event.repository.private }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hacs/action@main
+        with:
+          category: integration
+          comment: false

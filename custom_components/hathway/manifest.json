@@ -1,0 +1,14 @@
+{
+  "domain": "hathway",
+  "name": "Hathway Broadband",
+  "codeowners": [
+    "@ankurpandeyvns"
+  ],
+  "config_flow": true,
+  "documentation": "https://github.com/dtechterminal/ha-hathway",
+  "integration_type": "service",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/dtechterminal/ha-hathway/issues",
+  "requirements": [],
+  "version": "1.0.0"
+}

@@ -1,0 +1,120 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Hathway Broadband",
+        "description": "Sign in the way the Hathway app does: with your registered mobile number and an SMS OTP.\n\nHathway allows one active session per account. Signing in here signs the Hathway app out, and signing in on the app later ends this session (Home Assistant will then ask you to sign in again).",
+        "menu_options": {
+          "otp": "Sign in with an SMS OTP",
+          "token": "Use an existing session token"
+        }
+      },
+      "otp": {
+        "title": "Registered mobile number",
+        "description": "Hathway sends a 6-digit OTP to this number.",
+        "data": {
+          "mobile": "Mobile number"
+        }
+      },
+      "verify": {
+        "title": "Enter the OTP",
+        "description": "Enter the OTP sent to {mobile}.",
+        "data": {
+          "otp": "OTP",
+          "account_no": "Account"
+        }
+      },
+      "token": {
+        "title": "Existing session token",
+        "description": "For moving an existing setup (for example a command-line script) without a new SMS. The token, registered mobile number and account number must belong together.",
+        "data": {
+          "mobile": "Mobile number",
+          "account_no": "Account number",
+          "token": "Session token"
+        }
+      },
+      "reauth_confirm": {
+        "title": "Sign in to Hathway again",
+        "description": "Hathway ended this session, usually because someone signed in on the Hathway app. Submit to send a new OTP to {mobile}."
+      }
+    },
+    "error": {
+      "invalid_mobile": "Enter a 10-digit Indian mobile number.",
+      "no_account": "Hathway has no broadband account for this mobile number.",
+      "invalid_otp": "Hathway rejected the OTP. Check it and try again.",
+      "invalid_auth": "Hathway rejected this token.",
+      "cannot_connect": "Could not reach Hathway. Try again later.",
+      "unknown": "Unexpected error."
+    },
+    "abort": {
+      "already_configured": "This Hathway account is already set up; its session was updated.",
+      "reauth_successful": "Signed in again.",
+      "wrong_account": "That OTP signed in to a different Hathway account."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Billing cycle",
+        "description": "Hathway resets the data quota on the same day every month. Days until reset, the cycle dates and the projection use this day.",
+        "data": {
+          "reset_day": "Quota reset day of month",
+          "scan_minutes": "Refresh interval"
+        },
+        "data_description": {
+          "reset_day": "For short months a later day falls on the month's last day.",
+          "scan_minutes": "How often to ask Hathway for the counter."
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "data_used": {
+        "name": "Data used"
+      },
+      "data_remaining": {
+        "name": "Data remaining"
+      },
+      "data_quota": {
+        "name": "Data quota"
+      },
+      "usage_percentage": {
+        "name": "Usage percentage"
+      },
+      "projected_usage": {
+        "name": "Projected usage"
+      },
+      "days_until_reset": {
+        "name": "Days until reset"
+      },
+      "cycle_start": {
+        "name": "Cycle start"
+      },
+      "next_reset": {
+        "name": "Next reset"
+      },
+      "latest_day_usage": {
+        "name": "Latest day usage"
+      },
+      "expiry_date": {
+        "name": "Expiry date"
+      },
+      "plan": {
+        "name": "Plan"
+      },
+      "fup_status": {
+        "name": "FUP status"
+      },
+      "last_payment": {
+        "name": "Last payment"
+      },
+      "counter_updated": {
+        "name": "Counter updated"
+      },
+      "service_status": {
+        "name": "Service status"
+      }
+    }
+  }
+}
